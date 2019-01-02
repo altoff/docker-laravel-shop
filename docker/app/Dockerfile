@@ -96,14 +96,17 @@ opcache.enable_cli=1\n\
 opcache.enable=1\n" > /usr/local/etc/php/conf.d/opcache.ini \
     # For phpunit coverage
     && pecl install xdebug-${PHP_XDEBUG_VERSION} \
-    && git clone --branch ${PHP_REDIS_VERSION} https://github.com/phpredis/phpredis /tmp/phpredis \
-        && cd /tmp/phpredis \
-        && phpize  \
-        && ./configure  \
-        && make  \
-        && make install \
-        && make test \
-        && echo 'extension=redis.so' > /usr/local/etc/php/conf.d/redis.ini \
+        && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+        && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+        && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    # && git clone --branch ${PHP_REDIS_VERSION} https://github.com/phpredis/phpredis /tmp/phpredis \
+    #     && cd /tmp/phpredis \
+    #     && phpize  \
+    #     && ./configure  \
+    #     && make  \
+    #     && make install \
+    #     && make test \
+    #     && echo 'extension=redis.so' > /usr/local/etc/php/conf.d/redis.ini \
     && apk del .build-deps \
     && rm -rf /tmp/* \
     && rm -rf /app \

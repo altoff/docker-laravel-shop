@@ -13,10 +13,10 @@ volumes:
 
 services:
   &app-service app: &app-service-template
-    image: registry.gitlab.com/tarampampam/laravel-in-docker/app:latest
-    #build:
-    #  context: ./docker/app
-    #  dockerfile: Dockerfile
+    #image: registry.gitlab.com/tarampampam/laravel-in-docker/app:latest
+    build:
+     context: ./docker/app
+     dockerfile: Dockerfile
     user: "${USER_ID:-1000}:${GROUP_ID:-1000}"
     volumes:
     - /etc/passwd:/etc/passwd:ro
@@ -39,6 +39,7 @@ services:
       APP_ENV: local
       APP_DEBUG: 'true'
       HOME: /home/user
+      XDEBUG_CONFIG: remote_host=192.168.0.104
     command: keep-alive.sh
     depends_on:
     - redis
