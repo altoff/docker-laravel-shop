@@ -19,7 +19,7 @@ For local application starting (for development) make sure that you have locally
 This application uses next services:
 
 - Redis (cache, internal queue)
-- PostgreSQL (data storage)
+- MySQL (data storage)
 - PHP FPM
 - nginx
 
@@ -56,7 +56,7 @@ After application starting you can open [127.0.0.1:9999](http://127.0.0.1:9999/)
 Just execute into your terminal next commands:
 
 ```bash
-$ git clone https://gitlab.com/tarampampam/laravel-in-docker.git ./laravel-in-docker && cd $_
+$ git clone https://gitlab.com/tarampampam/docker-laravel-shop.git ./docker-laravel-shop && cd $_
 $ make init
 ```
 
